@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import arcpy
+import os
 
 
 class Toolbox:
@@ -166,10 +167,10 @@ class applySymbology:
         for dirpath, dirnames, filenames in arcpy.da.Walk(sym_folder):
             for filename in filenames:
                 sym_list.append(os.path.join(dirpath, filename))
-                sym_names_list.append(os.path.basename(filename))
+                sym_names_list.append(os.path.splitext(filename)[0])
         if group_layer:
             arcpy.AddMessage(f"Map layer selected, applying symbology to {group_layer}")
-            list_of_lyrs = group_layer
+            list_of_lyrs = m.listLayrs(os.path.basename(group_layer))[0]
         else:
             arcpy.AddMessage(f"No map layer chosen, applying symbology to Map: {map_name}")
             list_of_lyrs = m
