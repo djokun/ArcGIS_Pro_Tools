@@ -132,7 +132,7 @@ class applySymbology:
         p1 = arcpy.Parameter(
                 displayName = "Group Layer",
                 name = "group_layer",
-                datatype = "GPFeatureLayer",
+                datatype = "GPGroupLayer",
                 parameterType = "Optional",
                 direction = "Input"
                 )
@@ -170,7 +170,7 @@ class applySymbology:
                 sym_names_list.append(os.path.splitext(filename)[0])
         if group_layer:
             arcpy.AddMessage(f"Map layer selected, applying symbology to {group_layer}")
-            list_of_lyrs = m.listLayrs(os.path.basename(group_layer))[0]
+            list_of_lyrs = m.listLayers(os.path.basename(group_layer))[0]
         else:
             arcpy.AddMessage(f"No map layer chosen, applying symbology to Map: {map_name}")
             list_of_lyrs = m
